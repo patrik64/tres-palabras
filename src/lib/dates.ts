@@ -17,11 +17,12 @@ export function nextMondays(count = 6, from = new Date()): string[] {
 }
 
 /** 'Monday, Aug 3' — parses the key as local time; new Date('YYYY-MM-DD') would parse as UTC. */
-export function formatMonday(key: string): string {
+export function formatMonday(key: string, withYear = false): string {
 	const [y, m, d] = key.split('-').map(Number);
 	return new Date(y, m - 1, d).toLocaleDateString('en-US', {
 		weekday: 'long',
 		month: 'short',
-		day: 'numeric'
+		day: 'numeric',
+		...(withYear ? { year: 'numeric' } : {})
 	});
 }
