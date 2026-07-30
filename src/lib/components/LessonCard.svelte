@@ -17,6 +17,11 @@
 	// resync from server data unless the user is mid-edit
 	$effect(() => {
 		if (dirty) return;
+		if (mode === 'student' && isFuture) {
+			// don't reveal anything for lessons that haven't opened yet
+			words = ['', '', ''];
+			return;
+		}
 		words =
 			mode === 'teacher'
 				? [lesson?.spanish1 ?? '', lesson?.spanish2 ?? '', lesson?.spanish3 ?? '']
@@ -72,7 +77,7 @@
 		<div class="mt-2 {mode === 'student' ? 'grid grid-cols-2 items-center gap-2' : ''}">
 			{#if mode === 'student'}
 				<span class="truncate text-sm font-semibold text-gray-700 select-none">
-					{spanish[i] || '—'}
+					{isFuture ? '—' : spanish[i] || '—'}
 				</span>
 			{/if}
 			<input

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { repo } from 'remult';
 	import { Lesson } from '../../shared/Lesson';
-	import { nextMondays } from '$lib/dates';
+	import { currentWeekMondays, nextMondays } from '$lib/dates';
 	import LessonCard from './LessonCard.svelte';
 
 	let { mode }: { mode: 'teacher' | 'student' } = $props();
 
-	const mondays = nextMondays(6);
+	// the student keeps the current week's lesson all week; the teacher only preps upcoming ones
+	const mondays = $derived(mode === 'student' ? currentWeekMondays(6) : nextMondays(6));
 	let lessons = $state<Lesson[]>([]);
 
 	$effect(() =>
