@@ -38,11 +38,25 @@
 		{#if menuOpen}
 			<div class="absolute left-0 z-10 mt-1 w-40 rounded-md bg-white py-1 shadow-lg shadow-xs">
 				<a
+					href="/"
+					onclick={() => (menuOpen = false)}
+					class="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+				>
+					home
+				</a>
+				<a
 					href="/history"
 					onclick={() => (menuOpen = false)}
 					class="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
 				>
 					history
+				</a>
+				<a
+					href="/about"
+					onclick={() => (menuOpen = false)}
+					class="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+				>
+					about
 				</a>
 			</div>
 		{/if}
