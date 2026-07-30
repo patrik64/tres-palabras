@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { repo } from 'remult';
 	import { Lesson } from '../../shared/Lesson';
-	import { formatMonday } from '$lib/dates';
+	import { formatMonday, todayKey } from '$lib/dates';
 
 	let {
 		monday,
@@ -29,7 +29,8 @@
 		lesson?.spanish3 ?? ''
 	]);
 	const hasSpanish = $derived(spanish.some((w) => w !== ''));
-	const canEdit = $derived(mode === 'teacher' || hasSpanish);
+	const isFuture = $derived(monday > todayKey());
+	const canEdit = $derived(mode === 'teacher' || (hasSpanish && !isFuture));
 
 	async function save(e: SubmitEvent) {
 		e.preventDefault();
@@ -51,11 +52,17 @@
 
 <form
 	onsubmit={save}
-	class="rounded-lg bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out"
+	class="rounded-lg px-4 py-3 transition duration-500 ease-in-out {canEdit
+		? 'bg-white shadow-lg'
+		: 'bg-gray-200 opacity-60 shadow'}"
 >
 	<p class="font-semibold text-gray-900 select-none">{formatMonday(monday)}</p>
 
-	{#if mode === 'student' && !hasSpanish}
+	{#if mode === 'student' && isFuture}
+		<p class="mt-2 text-sm font-medium text-gray-500 select-none">
+			this lesson opens on its monday
+		</p>
+	{:else if mode === 'student' && !hasSpanish}
 		<p class="mt-2 text-sm font-medium text-gray-500 select-none">
 			the teacher hasn't added words for this monday yet
 		</p>

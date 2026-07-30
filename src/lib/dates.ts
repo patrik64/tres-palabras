@@ -3,6 +3,11 @@ function toKey(d: Date): string {
 	return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+/** Today as a 'YYYY-MM-DD' key, local time. Keys compare chronologically as strings. */
+export function todayKey(): string {
+	return toKey(new Date());
+}
+
 /** The next `count` Mondays as 'YYYY-MM-DD' keys, local time.
  *  If today is a Monday it counts as the first one. */
 export function nextMondays(count = 6, from = new Date()): string[] {
