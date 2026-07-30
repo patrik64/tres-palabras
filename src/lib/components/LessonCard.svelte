@@ -33,6 +33,11 @@
 		lesson?.spanish2 ?? '',
 		lesson?.spanish3 ?? ''
 	]);
+	const definitions = $derived([
+		lesson?.definition1 ?? '',
+		lesson?.definition2 ?? '',
+		lesson?.definition3 ?? ''
+	]);
 	const hasSpanish = $derived(spanish.some((w) => w !== ''));
 	const isFuture = $derived(monday > todayKey());
 	const canEdit = $derived(mode === 'teacher' || (hasSpanish && !isFuture));
@@ -92,6 +97,9 @@
 				autocapitalize="off"
 				class="form-input block w-full font-medium focus:shadow-outline-green disabled:bg-gray-100 disabled:text-gray-400 sm:text-sm sm:leading-5"
 			/>
+			{#if mode === 'teacher' && definitions[i] && words[i].trim().toLowerCase() === spanish[i].trim().toLowerCase()}
+				<p class="mt-1 text-xs font-medium text-gray-500 italic select-none">{definitions[i]}</p>
+			{/if}
 		</div>
 	{/each}
 

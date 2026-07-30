@@ -3,7 +3,10 @@
 	import { Lesson } from '../../shared/Lesson';
 	import { formatMonday } from '$lib/dates';
 
-	type Group = { monday: string; pairs: { spanish: string; english: string }[] };
+	type Group = {
+		monday: string;
+		pairs: { spanish: string; english: string; definition: string }[];
+	};
 
 	let groups = $state<Group[]>([]);
 	let loaded = $state(false);
@@ -16,9 +19,9 @@
 					.map((l) => ({
 						monday: l.monday,
 						pairs: [
-							{ spanish: l.spanish1, english: l.english1 },
-							{ spanish: l.spanish2, english: l.english2 },
-							{ spanish: l.spanish3, english: l.english3 }
+							{ spanish: l.spanish1, english: l.english1, definition: l.definition1 },
+							{ spanish: l.spanish2, english: l.english2, definition: l.definition2 },
+							{ spanish: l.spanish3, english: l.english3, definition: l.definition3 }
 						].filter((p) => p.spanish !== '' && p.english !== '')
 					}))
 					.filter((g) => g.pairs.length > 0);
@@ -42,10 +45,15 @@
 		{#each groups as group (group.monday)}
 			<div class="rounded-lg bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
 				<p class="font-semibold text-gray-900 select-none">{formatMonday(group.monday, true)}</p>
-				<div class="mt-2 space-y-1">
-					{#each group.pairs as pair (pair.spanish)}
+				<div class="mt-2 space-y-2">
+					{#each group.pairs as pair, i (i)}
 						<div class="grid grid-cols-2 gap-2 text-sm">
-							<span class="font-semibold text-gray-700">{pair.spanish}</span>
+							<div>
+								<span class="font-semibold text-gray-700">{pair.spanish}</span>
+								{#if pair.definition}
+									<p class="text-xs font-medium text-gray-500 italic">{pair.definition}</p>
+								{/if}
+							</div>
 							<span class="font-medium text-gray-600">{pair.english}</span>
 						</div>
 					{/each}
