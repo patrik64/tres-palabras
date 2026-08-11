@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { repo } from 'remult';
 	import { Lesson } from '../../shared/Lesson';
-	import { formatMonday, todayKey } from '$lib/dates';
+	import { formatMonday } from '$lib/dates';
 
 	let {
 		monday,
@@ -17,11 +17,6 @@
 	// resync from server data unless the user is mid-edit
 	$effect(() => {
 		if (dirty) return;
-		if (mode === 'student' && isFuture) {
-			// don't reveal anything for lessons that haven't opened yet
-			words = ['', '', ''];
-			return;
-		}
 		words =
 			mode === 'teacher'
 				? [lesson?.spanish1 ?? '', lesson?.spanish2 ?? '', lesson?.spanish3 ?? '']
@@ -39,8 +34,7 @@
 		lesson?.definition3 ?? ''
 	]);
 	const hasSpanish = $derived(spanish.some((w) => w !== ''));
-	const isFuture = $derived(monday > todayKey());
-	const canEdit = $derived(mode === 'teacher' || (hasSpanish && !isFuture));
+	const canEdit = $derived(mode === 'teacher' || hasSpanish);
 
 	async function save(e: SubmitEvent) {
 		e.preventDefault();
@@ -68,11 +62,7 @@
 >
 	<p class="font-semibold text-gray-900 select-none">{formatMonday(monday)}</p>
 
-	{#if mode === 'student' && isFuture}
-		<p class="mt-2 text-sm font-medium text-gray-500 select-none">
-			this lesson opens on its monday
-		</p>
-	{:else if mode === 'student' && !hasSpanish}
+	{#if mode === 'student' && !hasSpanish}
 		<p class="mt-2 text-sm font-medium text-gray-500 select-none">
 			the teacher hasn't added words for this monday yet
 		</p>
@@ -81,8 +71,8 @@
 	{#each [0, 1, 2] as i (i)}
 		<div class="mt-2 {mode === 'student' ? 'grid grid-cols-2 items-center gap-2' : ''}">
 			{#if mode === 'student'}
-				<span class="truncate text-sm font-semibold text-gray-700 select-none">
-					{isFuture ? '—' : spanish[i] || '—'}
+				<span class="truncate pr-2 text-right text-sm font-semibold text-gray-700 select-none">
+					{spanish[i] || '—'}
 				</span>
 			{/if}
 			<input

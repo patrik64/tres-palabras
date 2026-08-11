@@ -3,35 +3,26 @@ function toKey(d: Date): string {
 	return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-/** Today as a 'YYYY-MM-DD' key, local time. Keys compare chronologically as strings. */
-export function todayKey(): string {
-	return toKey(new Date());
-}
-
-function mondaysStarting(start: Date, count: number): string[] {
-	return Array.from({ length: count }, (_, i) => {
-		const m = new Date(start);
-		m.setDate(start.getDate() + i * 7);
-		return toKey(m);
-	});
-}
-
 /** The next `count` Mondays as 'YYYY-MM-DD' keys, local time.
  *  If today is a Monday it counts as the first one. */
 export function nextMondays(count = 6, from = new Date()): string[] {
 	const d = new Date(from);
 	d.setHours(0, 0, 0, 0);
 	d.setDate(d.getDate() + ((8 - d.getDay()) % 7));
-	return mondaysStarting(d, count);
+	return Array.from({ length: count }, (_, i) => {
+		const m = new Date(d);
+		m.setDate(d.getDate() + i * 7);
+		return toKey(m);
+	});
 }
 
-/** The current week's Monday (the most recent one, today included) plus the
- *  following `count - 1` Mondays, as 'YYYY-MM-DD' keys, local time. */
-export function currentWeekMondays(count = 6, from = new Date()): string[] {
+/** The current week's Monday (the most recent one, today included) as a
+ *  'YYYY-MM-DD' key, local time. */
+export function currentMonday(from = new Date()): string {
 	const d = new Date(from);
 	d.setHours(0, 0, 0, 0);
 	d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
-	return mondaysStarting(d, count);
+	return toKey(d);
 }
 
 /** 'Monday, Aug 3' — parses the key as local time; new Date('YYYY-MM-DD') would parse as UTC. */
