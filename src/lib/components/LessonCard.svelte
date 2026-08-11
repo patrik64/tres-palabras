@@ -71,7 +71,7 @@
 	{#each [0, 1, 2] as i (i)}
 		<div class="mt-2 {mode === 'student' ? 'grid grid-cols-2 items-center gap-2' : ''}">
 			{#if mode === 'student'}
-				<span class="truncate pr-2 text-right text-sm font-semibold text-gray-700 select-none">
+				<span class="truncate text-sm font-semibold text-gray-700 select-none">
 					{spanish[i] || '—'}
 				</span>
 			{/if}
