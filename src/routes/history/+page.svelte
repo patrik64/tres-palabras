@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatMonday } from '$lib/dates';
-	import { solvedLessons, type SolvedLesson } from '$lib/history';
+	import { downloadHistory, solvedLessons, type SolvedLesson } from '$lib/history';
 	import Spinner from '$lib/components/Spinner.svelte';
 
 	let groups = $state<SolvedLesson[]>([]);
@@ -22,6 +22,13 @@
 	<div class="flex items-center select-none">
 		<h1 class="text-lg font-semibold text-gray-900">history</h1>
 		<div class="flex-grow"></div>
+		<button
+			type="button"
+			onclick={downloadHistory}
+			class="mr-3 text-sm font-medium text-gray-700 underline hover:text-tertiary-600"
+		>
+			download
+		</button>
 		<a href="/" class="text-sm font-medium text-gray-700 underline hover:text-tertiary-600">home</a>
 	</div>
 
