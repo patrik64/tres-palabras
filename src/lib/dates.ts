@@ -3,6 +3,11 @@ function toKey(d: Date): string {
 	return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+/** Today as a 'YYYY-MM-DD' key, local time. */
+export function todayKey(): string {
+	return toKey(new Date());
+}
+
 /** The current week's Monday (the most recent one, today included) plus the
  *  following `count - 1` Mondays, as 'YYYY-MM-DD' keys, local time. */
 export function currentWeekMondays(count = 6, from = new Date()): string[] {

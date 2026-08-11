@@ -1,6 +1,7 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '$lib/components/Footer.svelte';
+	import { downloadHistory } from '$lib/history';
 	import '../app.css';
 
 	let { children } = $props();
@@ -53,6 +54,16 @@
 					>
 						history
 					</a>
+					<button
+						type="button"
+						onclick={() => {
+							menuOpen = false;
+							downloadHistory();
+						}}
+						class="block w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100"
+					>
+						download
+					</button>
 					<a
 						href="/about"
 						onclick={() => (menuOpen = false)}

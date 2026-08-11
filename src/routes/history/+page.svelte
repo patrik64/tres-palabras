@@ -1,32 +1,15 @@
 <script lang="ts">
-	import { repo } from 'remult';
-	import { Lesson } from '../../shared/Lesson';
 	import { formatMonday } from '$lib/dates';
+	import { solvedLessons, type SolvedLesson } from '$lib/history';
 
-	type Group = {
-		monday: string;
-		pairs: { spanish: string; english: string; definition: string }[];
-	};
-
-	let groups = $state<Group[]>([]);
+	let groups = $state<SolvedLesson[]>([]);
 	let loaded = $state(false);
 
 	$effect(() => {
-		repo(Lesson)
-			.find({ orderBy: { monday: 'desc' } })
-			.then((lessons) => {
-				groups = lessons
-					.map((l) => ({
-						monday: l.monday,
-						pairs: [
-							{ spanish: l.spanish1, english: l.english1, definition: l.definition1 },
-							{ spanish: l.spanish2, english: l.english2, definition: l.definition2 },
-							{ spanish: l.spanish3, english: l.english3, definition: l.definition3 }
-						].filter((p) => p.spanish !== '' && p.english !== '')
-					}))
-					.filter((g) => g.pairs.length > 0);
-				loaded = true;
-			});
+		solvedLessons().then((lessons) => {
+			groups = lessons;
+			loaded = true;
+		});
 	});
 </script>
 
