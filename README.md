@@ -9,6 +9,6 @@ pnpm i
 pnpm run dev
 ```
 
-or click on:
+try it:
 
 https://tres-palabras.vercel.app/
