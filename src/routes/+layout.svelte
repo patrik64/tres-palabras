@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '$lib/components/Footer.svelte';
+	import { randomFlag } from '$lib/flags';
 	import { downloadHistory } from '$lib/history';
 	import '../app.css';
 
 	let { children } = $props();
 	let menuOpen = $state(false);
+
+	// a different flag on every page switch; 'enter' is the first load, which
+	// hooks.server.ts has already picked one for
+	afterNavigate(({ type }) => {
+		if (type !== 'enter') document.body.dataset.flag = randomFlag(document.body.dataset.flag);
+	});
 </script>
 
 <svelte:head>

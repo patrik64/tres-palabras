@@ -43,9 +43,60 @@
 }
 
 body {
-	background-color: var(--color-primary-300);
+	background-color: var(--color-light-500);
+	/* fixed so the bands stay put instead of scrolling with the page */
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	color: var(--color-gray-900);
 }
+
+/* Flag backgrounds, picked per request in hooks.server.ts. Bands only — the
+   coats of arms, suns and stars these flags carry are left out. */
+body[data-flag='spain'] {
+	background-image: linear-gradient(to bottom, #aa151b 0 25%, #f1bf00 25% 75%, #aa151b 75%);
+}
+body[data-flag='colombia'] {
+	background-image: linear-gradient(to bottom, #fcd116 0 50%, #003893 50% 75%, #ce1126 75%);
+}
+body[data-flag='ecuador'] {
+	background-image: linear-gradient(to bottom, #ffdd00 0 50%, #0072ce 50% 75%, #ef3340 75%);
+}
+body[data-flag='venezuela'] {
+	background-image: linear-gradient(to bottom, #ffcc00 0 33.34%, #00247d 33.34% 66.67%, #cf142b 66.67%);
+}
+body[data-flag='bolivia'] {
+	background-image: linear-gradient(to bottom, #d52b1e 0 33.34%, #f9e300 33.34% 66.67%, #007934 66.67%);
+}
+body[data-flag='argentina'] {
+	background-image: linear-gradient(to bottom, #74acdf 0 33.34%, #fff 33.34% 66.67%, #74acdf 66.67%);
+}
+body[data-flag='mexico'] {
+	background-image: linear-gradient(to right, #006847 0 33.34%, #fff 33.34% 66.67%, #ce1126 66.67%);
+}
+body[data-flag='peru'] {
+	background-image: linear-gradient(to right, #d91023 0 33.34%, #fff 33.34% 66.67%, #d91023 66.67%);
+}
+/* a blue hoist square over the top half, red across the bottom */
+body[data-flag='chile'] {
+	background-image:
+		linear-gradient(to right, #0039a6 0 33.34%, #fff 33.34%),
+		linear-gradient(#d52b1e, #d52b1e);
+	background-size: 100% 50%;
+	background-position:
+		top,
+		bottom;
+}
+/* four quarters: white and red on top, blue and white below */
+body[data-flag='panama'] {
+	background-image:
+		linear-gradient(to right, #fff 0 50%, #da121a 50%),
+		linear-gradient(to right, #072357 0 50%, #fff 50%);
+	background-size: 100% 50%;
+	background-position:
+		top,
+		bottom;
+}
+
 
 /* Tailwind v1 @tailwindcss/custom-forms `form-input`, as used in qlist modals */
 @utility form-input {

@@ -18,7 +18,7 @@
 	});
 </script>
 
-<div class="mx-auto mt-2 w-full max-w-[52rem] p-4 lg:rounded-[5px] lg:border lg:border-dashed lg:border-gray-600">
+<div class="mx-auto mt-2 w-full max-w-[52rem] p-4">
 	<div class="flex items-center select-none">
 		<h1 class="text-lg font-semibold text-gray-900">history</h1>
 		<div class="flex-grow"></div>

@@ -1,4 +1,4 @@
-<div class="mx-auto mt-2 w-full max-w-[52rem] p-4 lg:rounded-[5px] lg:border lg:border-dashed lg:border-gray-600">
+<div class="mx-auto mt-2 w-full max-w-[52rem] p-4">
 	<div class="mt-4 grid gap-4 sm:grid-cols-2">
 		<a
 			href="/teacher"
