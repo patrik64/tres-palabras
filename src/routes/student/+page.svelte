@@ -4,9 +4,9 @@
 
 <div class="mx-auto mt-2 w-full max-w-md p-4">
 	<div class="flex items-center select-none">
-		<h1 class="text-lg font-semibold text-gray-900">student</h1>
+		<h1 class="rounded-full bg-white px-3 py-1 text-lg font-semibold text-gray-900">student</h1>
 		<div class="flex-grow"></div>
-		<a href="/" class="text-sm font-medium text-gray-700 underline hover:text-tertiary-600">home</a>
+		<a href="/" class="rounded-full bg-white px-3 py-1 text-sm font-medium text-gray-700 hover:text-tertiary-600">home</a>
 	</div>
 	<LessonCalendar mode="student" />
 </div>

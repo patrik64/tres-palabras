@@ -1,8 +1,8 @@
 <div class="mx-auto mt-2 w-full max-w-[52rem] p-4">
 	<div class="flex items-center select-none">
-		<h1 class="text-lg font-semibold text-gray-900">about</h1>
+		<h1 class="rounded-full bg-white px-3 py-1 text-lg font-semibold text-gray-900">about</h1>
 		<div class="flex-grow"></div>
-		<a href="/" class="text-sm font-medium text-gray-700 underline hover:text-tertiary-600">home</a>
+		<a href="/" class="rounded-full bg-white px-3 py-1 text-sm font-medium text-gray-700 hover:text-tertiary-600">home</a>
 	</div>
 
 	<div class="mt-4 rounded-lg border-2 border-gray-600 bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
