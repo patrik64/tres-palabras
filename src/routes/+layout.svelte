@@ -38,7 +38,7 @@
 				}}
 				class="flex h-8 w-8 items-center justify-center rounded-full transition duration-150 ease-in-out hover:bg-tertiary-500 focus:outline-none"
 			>
-				<svg width="20" height="20" viewBox="0 0 20 20" fill="gray">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="black">
 					<path
 						fill-rule="evenodd"
 						d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
