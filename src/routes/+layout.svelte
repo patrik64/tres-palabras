@@ -82,7 +82,7 @@
 				</div>
 			{/if}
 		</div>
-		<a href="/" class="-mt-1 pl-1 font-semibold">tres palabras</a>
+		<a href="/" class="ml-2 rounded-full bg-white px-3 py-1 font-semibold">tres palabras</a>
 	</div>
 	
 	<main class="flex-1">
