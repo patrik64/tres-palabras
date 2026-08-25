@@ -70,6 +70,9 @@ body[data-flag='bolivia'] {
 body[data-flag='argentina'] {
 	background-image: linear-gradient(to bottom, #74acdf 0 33.34%, #fff 33.34% 66.67%, #74acdf 66.67%);
 }
+body[data-flag='honduras'] {
+	background-image: linear-gradient(to bottom, #0073cf 0 33.34%, #fff 33.34% 66.67%, #0073cf 66.67%);
+}
 /* five bands, the red one double height */
 body[data-flag='costa-rica'] {
 	background-image: linear-gradient(
