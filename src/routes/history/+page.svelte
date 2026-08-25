@@ -39,7 +39,7 @@
 	{:else}
 		<div class="mt-4 space-y-4">
 			{#each groups as group (group.monday)}
-				<div class="rounded-lg bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
+				<div class="rounded-lg border border-gray-600 bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
 					<p class="font-semibold text-gray-900 select-none">{formatMonday(group.monday, true)}</p>
 					<div class="mt-2 space-y-2">
 						{#each group.pairs as pair, i (i)}
