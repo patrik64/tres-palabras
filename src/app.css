@@ -90,6 +90,9 @@ body[data-flag='mexico'] {
 body[data-flag='peru'] {
 	background-image: linear-gradient(to right, #d91023 0 33.34%, #fff 33.34% 66.67%, #d91023 66.67%);
 }
+body[data-flag='guatemala'] {
+	background-image: linear-gradient(to right, #4997d0 0 33.34%, #fff 33.34% 66.67%, #4997d0 66.67%);
+}
 /* a blue hoist square over the top half, red across the bottom */
 body[data-flag='chile'] {
 	background-image:
