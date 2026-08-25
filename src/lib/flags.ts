@@ -5,6 +5,7 @@ export const flags = [
 	'bolivia',
 	'chile',
 	'colombia',
+	'costa-rica',
 	'ecuador',
 	'mexico',
 	'panama',
