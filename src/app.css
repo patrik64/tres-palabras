@@ -103,6 +103,31 @@ body[data-flag='chile'] {
 		top,
 		bottom;
 }
+/* five stripes with a red triangle on the hoist. the triangle is two layers,
+   each a box split along its own diagonal — the 'to <corner>' keywords put the
+   hard stop through the neighbouring corners, so it stays a clean triangle
+   whatever the viewport ratio */
+body[data-flag='cuba'] {
+	background-image:
+		linear-gradient(to bottom left, transparent 50%, #cf142b 50%),
+		linear-gradient(to top left, transparent 50%, #cf142b 50%),
+		linear-gradient(
+			to bottom,
+			#002a8f 0 20%,
+			#fff 20% 40%,
+			#002a8f 40% 60%,
+			#fff 60% 80%,
+			#002a8f 80%
+		);
+	background-size:
+		40% 50%,
+		40% 50%,
+		100% 100%;
+	background-position:
+		top left,
+		bottom left,
+		top left;
+}
 /* four quarters: white and red on top, blue and white below */
 body[data-flag='panama'] {
 	background-image:
