@@ -56,7 +56,7 @@
 
 <form
 	onsubmit={save}
-	class="rounded-lg border border-gray-600 px-4 py-3 transition duration-500 ease-in-out {canEdit
+	class="rounded-lg border-2 border-gray-600 px-4 py-3 transition duration-500 ease-in-out {canEdit
 		? 'bg-white shadow-lg'
 		: 'bg-gray-200 opacity-60 shadow'}"
 >

@@ -5,7 +5,7 @@
 		<a href="/" class="text-sm font-medium text-gray-700 underline hover:text-tertiary-600">home</a>
 	</div>
 
-	<div class="mt-4 rounded-lg border border-gray-600 bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
+	<div class="mt-4 rounded-lg border-2 border-gray-600 bg-white px-4 py-3 shadow-lg transition duration-500 ease-in-out">
 		<p class="font-semibold text-gray-900">tres palabras</p>
 		<p class="mt-2 text-sm font-medium text-gray-700">
 			three spanish words, every monday. the teacher picks three words for each lesson, the

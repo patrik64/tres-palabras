@@ -2,7 +2,7 @@
 	<div class="mt-4 grid gap-4 sm:grid-cols-2">
 		<a
 			href="/teacher"
-			class="group rounded-lg border border-gray-600 bg-white px-6 py-10 text-center shadow-lg transition duration-500 ease-in-out hover:bg-tertiary-500"
+			class="group rounded-lg border-2 border-gray-600 bg-white px-6 py-10 text-center shadow-lg transition duration-500 ease-in-out hover:bg-tertiary-500"
 		>
 			<p class="text-2xl font-semibold text-gray-900 group-hover:text-white">teacher</p>
 			<p class="mt-2 text-sm font-medium text-gray-500 group-hover:text-gray-100">
@@ -11,7 +11,7 @@
 		</a>
 		<a
 			href="/student"
-			class="group rounded-lg border border-gray-600 bg-white px-6 py-10 text-center shadow-lg transition duration-500 ease-in-out hover:bg-secondary-500"
+			class="group rounded-lg border-2 border-gray-600 bg-white px-6 py-10 text-center shadow-lg transition duration-500 ease-in-out hover:bg-secondary-500"
 		>
 			<p class="text-2xl font-semibold text-gray-900 group-hover:text-white">student</p>
 			<p class="mt-2 text-sm font-medium text-gray-500 group-hover:text-gray-100">
