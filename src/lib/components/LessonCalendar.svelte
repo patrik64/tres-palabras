@@ -12,24 +12,38 @@
 	let lessons = $state<Lesson[]>([]);
 	let loaded = $state(false);
 
-	$effect(() =>
+	// a plain fetch, not a live query: the live query's SSE stream gets cut
+	// after a second on netlify functions, and the client reconnects forever
+	// without ever loading anything
+	$effect(() => {
 		repo(Lesson)
-			.liveQuery({ where: { monday: { $in: mondays } } })
-			.subscribe({
-				next: (info) => {
-					lessons = info.applyChanges(lessons);
+			.find({ where: { monday: { $in: mondays } } })
+			.then(
+				(found) => {
+					lessons = found;
 					loaded = true;
 				},
 				// fall through to empty cards rather than spinning forever
-				error: () => (loaded = true)
-			})
-	);
+				() => (loaded = true)
+			);
+	});
+
+	// without live updates the card hands back what it saved, so the
+	// definitions the server looked up show without a reload
+	function replace(saved: Lesson) {
+		lessons = [...lessons.filter((l) => l.monday !== saved.monday), saved];
+	}
 </script>
 
 {#if loaded}
 	<div class="mt-4 grid gap-4 {mondays.length > 1 ? 'sm:grid-cols-2' : ''}">
 		{#each mondays as monday (monday)}
-			<LessonCard {monday} {mode} lesson={lessons.find((l) => l.monday === monday)} />
+			<LessonCard
+				{monday}
+				{mode}
+				lesson={lessons.find((l) => l.monday === monday)}
+				onsaved={replace}
+			/>
 		{/each}
 	</div>
 {:else}

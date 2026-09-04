@@ -6,8 +6,14 @@
 	let {
 		monday,
 		mode,
-		lesson
-	}: { monday: string; mode: 'teacher' | 'student'; lesson?: Lesson } = $props();
+		lesson,
+		onsaved
+	}: {
+		monday: string;
+		mode: 'teacher' | 'student';
+		lesson?: Lesson;
+		onsaved: (lesson: Lesson) => void;
+	} = $props();
 
 	let words = $state(['', '', '']);
 	let dirty = $state(false);
@@ -44,7 +50,9 @@
 				mode === 'teacher'
 					? { spanish1: words[0], spanish2: words[1], spanish3: words[2] }
 					: { english1: words[0], english2: words[1], english3: words[2] };
-			await repo(Lesson).upsert({ where: { monday }, set });
+			// hand the saved row up before clearing dirty, so the resync below
+			// reads the fresh lesson rather than the stale one
+			onsaved(await repo(Lesson).upsert({ where: { monday }, set }));
 			dirty = false;
 			saved = true;
 			setTimeout(() => (saved = false), 1500);
