@@ -11,4 +11,4 @@ pnpm run dev
 
 try it:
 
-https://tres-palabras.vercel.app/
+https://tres-palabras.netlify.app/
