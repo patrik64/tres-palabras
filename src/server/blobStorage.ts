@@ -1,36 +1,29 @@
-import { get, put, BlobNotFoundError } from '@vercel/blob';
+import { getStore, type Store } from '@netlify/blobs';
 import type { JsonEntityStorage } from 'remult';
 
-/** Keeps remult's JSON database in vercel blob — one blob per entity, same
- *  shape as the files under ./db. Vercel's function filesystem is read-only,
+/** Keeps remult's JSON database in netlify blobs — one blob per entity, same
+ *  shape as the files under ./db. Netlify's function filesystem is read-only,
  *  so the deployed app has nowhere else to write. */
 export class BlobJsonStorage implements JsonEntityStorage {
-	// the sdk reads process.env, which sveltekit's dotenv loading doesn't fill in dev
-	constructor(private token: string) {}
+	private store: Store;
+
+	/** On netlify the sdk configures itself from the environment; locally
+	 *  pass the site id and a personal access token. */
+	constructor(credentials?: { siteID: string; token: string }) {
+		this.store = getStore({
+			name: 'lessons',
+			// remult reads the whole file and writes it back, so a stale read
+			// would silently drop the last save — the default is eventual
+			consistency: 'strong',
+			...credentials
+		});
+	}
 
 	async getItem(entityDbName: string): Promise<string | null> {
-		try {
-			// useCache: false — the cdn caches for a minute at minimum, which
-			// would serve a stale lesson right after the teacher saved one
-			const res = await get(`${entityDbName}.json`, {
-				access: 'private',
-				useCache: false,
-				token: this.token
-			});
-			return res?.statusCode === 200 ? await new Response(res.stream).text() : null;
-		} catch (err) {
-			if (err instanceof BlobNotFoundError) return null; // no lessons saved yet
-			throw err;
-		}
+		return this.store.get(`${entityDbName}.json`, { type: 'text' }); // null when nothing saved yet
 	}
 
 	async setItem(entityDbName: string, json: string): Promise<void> {
-		await put(`${entityDbName}.json`, json, {
-			access: 'private',
-			contentType: 'application/json',
-			allowOverwrite: true,
-			cacheControlMaxAge: 60,
-			token: this.token
-		});
+		await this.store.set(`${entityDbName}.json`, json);
 	}
 }

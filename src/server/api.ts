@@ -6,8 +6,15 @@ import { Lesson } from '../shared/Lesson';
 import { BlobJsonStorage } from './blobStorage';
 
 function blobDataProvider() {
-	if (!env.BLOB_READ_WRITE_TOKEN) return undefined; // JSON files under ./db (local dev)
-	return new JsonDataProvider(new BlobJsonStorage(env.BLOB_READ_WRITE_TOKEN), true);
+	// on netlify the blobs sdk finds its own credentials
+	if (env.NETLIFY_BLOBS_CONTEXT) return new JsonDataProvider(new BlobJsonStorage(), true);
+	// local dev against the real store, if a site id and token are provided
+	if (env.NETLIFY_SITE_ID && env.NETLIFY_AUTH_TOKEN)
+		return new JsonDataProvider(
+			new BlobJsonStorage({ siteID: env.NETLIFY_SITE_ID, token: env.NETLIFY_AUTH_TOKEN }),
+			true
+		);
+	return undefined; // JSON files under ./db
 }
 
 export const api = remultApi({
